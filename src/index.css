@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tooltip: #262626;
+  --color-text-inverse: #f9f9f9;
+  --color-text-inverse-subtle: #a3a3a3;
+  --color-action-primary: #4093ff;
+  --color-text-primary-hover: #005ed9;
+  --color-chart-download: #4acfdc;
+  --color-chart-upload: #d9adff;
+  --color-chart-latency: #dbc65d;
+  --color-chart-loss: #e03030;
+
+  --radius-tooltip: 8px;
+  --shadow-tooltip: 0px 4px 16px rgba(0, 0, 0, 0.12);
+
+  --text-body-xs:   12px;
+  --text-body-s:    14px;
+  --text-heading-s: 14px;
+  --text-heading-m: 16px;
+  --text-action-s:  14px;
+  --text-action-m:  16px;
+
+  --font-family-sans: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Explicit typography utilities — guarantee correct sizes regardless of Tailwind v4 @theme processing */
+.text-body-xs   { font-size: 12px; line-height: 16px; }
+.text-body-s    { font-size: 14px; line-height: 20px; }
+.text-heading-s { font-size: 14px; line-height: 20px; }
+.text-heading-m { font-size: 16px; line-height: 24px; }
+.text-action-s  { font-size: 14px; line-height: 20px; }
+.text-action-m  { font-size: 16px; line-height: 24px; }
+
+/* Dark mode overrides — applied when .dark class is present on an ancestor */
+.dark {
+  --color-tooltip: #404040;
+  --color-text-inverse-subtle: #d4d4d4;
+  --color-action-primary: #80b7ff;
+  --color-text-primary-hover: #4093ff;
+  --color-chart-loss: #ff6b6b;
+}
