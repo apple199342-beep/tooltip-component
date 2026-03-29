@@ -14,6 +14,8 @@ export interface DataRow {
   hasLegend?: boolean;
   /** Show the trend icon. Defaults to true. */
   hasIcon?: boolean;
+  /** Apply chart color to the value text. Defaults to true. */
+  hasValueColor?: boolean;
   /** Icon style for the trend indicator. Defaults to 'arrow'. Instance-swappable in Figma. */
   trendIcon?: 'arrow' | 'chevron' | 'caret';
 }
@@ -205,7 +207,7 @@ export default function Tooltip({
                   </span>
                 </div>
                 {/* Value */}
-                <div className={`flex gap-1 items-center ${chartClasses[row.color].text}`}>
+                <div className={`flex gap-1 items-center ${row.hasValueColor !== false ? chartClasses[row.color].text : 'text-text-inverse'}`}>
                   {row.hasIcon !== false && row.trend !== null && (() => {
                     const style = row.trendIcon ?? 'arrow';
                     const isUp = row.trend === 'up';
