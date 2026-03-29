@@ -555,38 +555,38 @@ export default function TooltipDemo() {
 
           <Divider isDark={isDark} />
 
-          {/* Legend Shape (instance swap) */}
-          <SubHeading isDark={isDark}>Legend Shape</SubHeading>
+          {/* Trend Icon (instance swap) */}
+          <SubHeading isDark={isDark}>Trend Icon</SubHeading>
           <div className="flex items-center gap-2 flex-wrap">
             <Anchor placement="Up"
               tip={<Tooltip type="Data" placement="Up" hasTitle={false} hasSubtitle={false} hasAction={false}
                 dataRows={[
-                  { label: 'Download', value: '7.05 KB', color: 'download', trend: 'down', legendShape: 'square' },
-                  { label: 'Upload',   value: '7.05 KB', color: 'upload',   trend: 'up',   legendShape: 'square' },
-                  { label: 'Latency',  value: '1 ms',    color: 'latency',  trend: null,   legendShape: 'square' },
-                  { label: 'Loss',     value: '0 %',     color: 'loss',     trend: null,   legendShape: 'square' },
+                  { label: 'Download', value: '7.05 KB', color: 'download', trend: 'down', trendIcon: 'arrow' },
+                  { label: 'Upload',   value: '7.05 KB', color: 'upload',   trend: 'up',   trendIcon: 'arrow' },
+                  { label: 'Latency',  value: '1 ms',    color: 'latency',  trend: null },
+                  { label: 'Loss',     value: '0 %',     color: 'loss',     trend: null },
                 ]} />}>
-              <button style={textBtn}>Square</button>
+              <button style={textBtn}>Arrow</button>
             </Anchor>
             <Anchor placement="Up"
               tip={<Tooltip type="Data" placement="Up" hasTitle={false} hasSubtitle={false} hasAction={false}
                 dataRows={[
-                  { label: 'Download', value: '7.05 KB', color: 'download', trend: 'down', legendShape: 'circle' },
-                  { label: 'Upload',   value: '7.05 KB', color: 'upload',   trend: 'up',   legendShape: 'circle' },
-                  { label: 'Latency',  value: '1 ms',    color: 'latency',  trend: null,   legendShape: 'circle' },
-                  { label: 'Loss',     value: '0 %',     color: 'loss',     trend: null,   legendShape: 'circle' },
+                  { label: 'Download', value: '7.05 KB', color: 'download', trend: 'down', trendIcon: 'chevron' },
+                  { label: 'Upload',   value: '7.05 KB', color: 'upload',   trend: 'up',   trendIcon: 'chevron' },
+                  { label: 'Latency',  value: '1 ms',    color: 'latency',  trend: null },
+                  { label: 'Loss',     value: '0 %',     color: 'loss',     trend: null },
                 ]} />}>
-              <button style={textBtn}>Circle</button>
+              <button style={textBtn}>Chevron</button>
             </Anchor>
             <Anchor placement="Up"
               tip={<Tooltip type="Data" placement="Up" hasTitle={false} hasSubtitle={false} hasAction={false}
                 dataRows={[
-                  { label: 'Download', value: '7.05 KB', color: 'download', trend: 'down', legendShape: 'line' },
-                  { label: 'Upload',   value: '7.05 KB', color: 'upload',   trend: 'up',   legendShape: 'line' },
-                  { label: 'Latency',  value: '1 ms',    color: 'latency',  trend: null,   legendShape: 'line' },
-                  { label: 'Loss',     value: '0 %',     color: 'loss',     trend: null,   legendShape: 'line' },
+                  { label: 'Download', value: '7.05 KB', color: 'download', trend: 'down', trendIcon: 'caret' },
+                  { label: 'Upload',   value: '7.05 KB', color: 'upload',   trend: 'up',   trendIcon: 'caret' },
+                  { label: 'Latency',  value: '1 ms',    color: 'latency',  trend: null },
+                  { label: 'Loss',     value: '0 %',     color: 'loss',     trend: null },
                 ]} />}>
-              <button style={textBtn}>Line</button>
+              <button style={textBtn}>Caret</button>
             </Anchor>
           </div>
 

@@ -12,10 +12,10 @@ export interface DataRow {
   trend?: 'up' | 'down' | null;
   /** Show the colored legend dot. Defaults to true. */
   hasLegend?: boolean;
-  /** Shape of the legend indicator. Defaults to 'square'. Instance-swappable in Figma. */
-  legendShape?: 'square' | 'circle' | 'line';
-  /** Show the trend arrow icon. Defaults to true. */
+  /** Show the trend icon. Defaults to true. */
   hasIcon?: boolean;
+  /** Icon style for the trend indicator. Defaults to 'arrow'. Instance-swappable in Figma. */
+  trendIcon?: 'arrow' | 'chevron' | 'caret';
 }
 
 export interface TooltipProps {
@@ -74,14 +74,7 @@ const DEFAULT_DATA_ROWS: DataRow[] = [
 
 function ArrowUpIcon({ className }: { className?: string }) {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={className}>
       <path d="M8 12.67V3.33" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       <path d="M4 7L8 3L12 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -90,16 +83,41 @@ function ArrowUpIcon({ className }: { className?: string }) {
 
 function ArrowDownIcon({ className }: { className?: string }) {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={className}>
       <path d="M8 3.33V12.67" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       <path d="M4 9L8 13L12 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ChevronUpIcon({ className }: { className?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={className}>
+      <path d="M4 10L8 6L12 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ChevronDownIcon({ className }: { className?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={className}>
+      <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function CaretUpIcon({ className }: { className?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={className}>
+      <path d="M8 5L13 11H3L8 5Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function CaretDownIcon({ className }: { className?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={className}>
+      <path d="M8 11L3 5H13L8 11Z" fill="currentColor" />
     </svg>
   );
 }
@@ -179,23 +197,22 @@ export default function Tooltip({
               <div key={row.label} className="flex items-center justify-between w-full">
                 {/* Label */}
                 <div className="flex gap-1 items-center">
-                  {row.hasLegend !== false && (() => {
-                    const shape = row.legendShape ?? 'square';
-                    const bg = chartClasses[row.color].bg;
-                    if (shape === 'circle')
-                      return <div className={`${bg} size-2 rounded-full shrink-0`} />;
-                    if (shape === 'line')
-                      return <div className={`${bg} w-3 h-[2px] rounded-full shrink-0`} />;
-                    return <div className={`${bg} size-2 shrink-0`} />;
-                  })()}
+                    {row.hasLegend !== false && (
+                    <div className={`${chartClasses[row.color].bg} size-2 shrink-0`} />
+                  )}
                   <span className="text-body-xs font-normal text-text-inverse-subtle whitespace-nowrap">
                     {row.label}
                   </span>
                 </div>
                 {/* Value */}
                 <div className={`flex gap-1 items-center ${chartClasses[row.color].text}`}>
-                  {row.hasIcon !== false && row.trend === 'down' && <ArrowDownIcon className="size-4 shrink-0" />}
-                  {row.hasIcon !== false && row.trend === 'up'   && <ArrowUpIcon   className="size-4 shrink-0" />}
+                  {row.hasIcon !== false && row.trend !== null && (() => {
+                    const style = row.trendIcon ?? 'arrow';
+                    const isUp = row.trend === 'up';
+                    if (style === 'chevron') return isUp ? <ChevronUpIcon className="size-4 shrink-0" /> : <ChevronDownIcon className="size-4 shrink-0" />;
+                    if (style === 'caret')   return isUp ? <CaretUpIcon   className="size-4 shrink-0" /> : <CaretDownIcon   className="size-4 shrink-0" />;
+                    return isUp ? <ArrowUpIcon className="size-4 shrink-0" /> : <ArrowDownIcon className="size-4 shrink-0" />;
+                  })()}
                   <span className="text-body-xs font-normal text-right whitespace-nowrap">
                     {row.value}
                   </span>
